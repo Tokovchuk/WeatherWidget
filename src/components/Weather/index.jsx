@@ -5,26 +5,12 @@ import CurrentDate from "./Date";
 import Location from "./Location";
 import TypeAndTemperature from "./TypeAndTemperature";
 import HumidityAndWind from "./HumidityAndWind";
-import Preloader from "../../helpers/Preloader";
-
-const Wrapper = styled.div`
-  margin: 20px auto;
-  padding: 20px;
-  width: 300px;
-  height: 300px;
-  border: 2px solid gray;
-  border-radius: 10px;
-  background: linear-gradient(to bottom, #0099ff 0%, #33cccc 100%);
-  color: whitesmoke;
-  font-family: 'Bakbak One', cursive;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2);
-`
+import '@blueprintjs/core/lib/css/blueprint.css'
+import {Intent, Spinner, SpinnerSize} from '@blueprintjs/core';
+import {Secret} from "../../secret";
 
 const Weather = () => {
+
   const [loading, setLoading] = useState(true);
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
@@ -45,7 +31,27 @@ const Weather = () => {
       icon: null
     },
     date: null,
-  })
+  });
+
+  const Wrapper = styled.div`
+    margin: 20px auto;
+    padding: 20px;
+    width: 300px;
+    height: 300px;
+    border: 2px solid gray;
+    border-radius: 10px;
+    background: ${data.isDay === 0
+            ? 'linear-gradient(to bottom, #003366 0%, #666699 100%)'
+            : 'linear-gradient(to bottom, #0099ff 0%, #33cccc 100%)'
+    };
+    color: whitesmoke;
+    font-family: 'Bakbak One', cursive;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2);
+  `
 
 
   useEffect(() => {
@@ -55,7 +61,7 @@ const Weather = () => {
     })
   });
   useEffect(() => {
-    const API_KEY = '2b82cd98785b4465a1a73649211412';
+    const API_KEY = Secret.API_KEY;
     if (latitude && longitude) {
       const URL = `https://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${latitude},${longitude}`
       axios.get(URL)
@@ -84,17 +90,17 @@ const Weather = () => {
   }, [latitude, longitude]);
   return (
     <Wrapper>
-      {loading ? <Preloader/> : (<>
-        <TypeAndTemperature icon={data.weather.icon}
-                            currentTemperature={data.weather.currentTemperature}
-                            type={data.weather.type}/>
-        <CurrentDate date={data.date}/>
-        <Location city={data.location.city} country={data.location.country} />
-        <HumidityAndWind humidity={data.weather.humidity}
-        windDirection={data.weather.wind.direction}
-        windSpeed={data.weather.wind.speed} />
+      {loading ? <Spinner size={SpinnerSize.LARGE} intent={Intent.PRIMARY}/> : (<>
+          <TypeAndTemperature icon={data.weather.icon}
+                              currentTemperature={data.weather.currentTemperature}
+                              type={data.weather.type}/>
+          <CurrentDate date={data.date}/>
+          <Location city={data.location.city} country={data.location.country}/>
+          <HumidityAndWind humidity={data.weather.humidity}
+                           windDirection={data.weather.wind.direction}
+                           windSpeed={data.weather.wind.speed}/>
         </>
-        )}
+      )}
     </Wrapper>
   );
 }
