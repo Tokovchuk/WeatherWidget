@@ -14,6 +14,8 @@ const TypeWeather = styled.div`
 `;
 
 const Temperature = styled.div`
+  display: flex;
+  align-items: baseline;
   font-size: 50px;
 `
 
@@ -25,7 +27,7 @@ const TypeAndTemperature = (props) => {
         <span>{props.type}</span>
       </TypeWeather>
       <Temperature>
-        <Icon icon='temperature' color='whitesmoke' size={30}/>
+        <Icon icon='temperature' color='whitesmoke' size={30} tagName='div'/>
         <span>
           {props.currentTemperature}&deg;C
         </span>

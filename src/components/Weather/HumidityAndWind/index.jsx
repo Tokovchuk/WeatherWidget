@@ -12,6 +12,7 @@ const Wrapper = styled.div`
 const HumidityWrapper = styled.div`
   display: flex;
   align-items: center;
+  column-gap: 5px;
   
   & span {
     line-height: 0;
@@ -20,6 +21,7 @@ const HumidityWrapper = styled.div`
 
 const WindWrapper = styled.div`
   display: flex;
+  column-gap: 5px;
 `
 
 const HumidityAndWind = (props) => {
