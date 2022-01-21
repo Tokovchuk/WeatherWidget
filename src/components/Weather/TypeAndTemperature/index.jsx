@@ -1,6 +1,7 @@
 import React from 'react';
 import {Icon} from '@blueprintjs/core';
 import styled from 'styled-components';
+import PropTypes from "prop-types";
 
 const Wrapper = styled.div`
   display: flex;
@@ -36,4 +37,12 @@ const TypeAndTemperature = (props) => {
   );
 };
 
+TypeAndTemperature.propTypes = {
+  icon: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  currentTemperature: PropTypes.number.isRequired
+};
+
 export default TypeAndTemperature;
+
+

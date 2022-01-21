@@ -1,5 +1,6 @@
 import React from 'react';
 import {Icon} from "@blueprintjs/core";
+import PropTypes from "prop-types";
 
 const DirectionIcon = (props) => {
   let iconName;
@@ -40,11 +41,13 @@ const DirectionIcon = (props) => {
     default:
       iconName = null;
   }
-  console.log('props - ', props.direction)
-  console.log('iconName', iconName)
   return (
     <Icon icon={iconName} color='whitesmoke'/>
   );
 };
+
+DirectionIcon.propTypes = {
+  direction: PropTypes.string
+}
 
 export default DirectionIcon;

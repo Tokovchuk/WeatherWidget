@@ -16,21 +16,21 @@ const Weather = () => {
   const [longitude, setLongitude] = useState(null);
   const [data, setData] = useState({
     location: {
-      country: null,
-      city: null,
+      country: '',
+      city: '',
     },
     isDay: 1,
     weather: {
-      type: null,
-      currentTemperature: null,
+      type: '',
+      currentTemperature: 0,
       wind: {
-        speed: null,
-        direction: null,
+        speed: 0,
+        direction: '',
       },
-      humidity: null,
-      icon: null
+      humidity: 0,
+      icon: ''
     },
-    date: null,
+    date: '',
   });
 
   const Wrapper = styled.div`

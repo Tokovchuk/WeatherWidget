@@ -2,6 +2,7 @@ import React from 'react';
 import {Icon} from '@blueprintjs/core';
 import styled from 'styled-components';
 import DirectionIcon from "./DirectionIcon";
+import PropTypes from "prop-types";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -44,5 +45,11 @@ const HumidityAndWind = (props) => {
     </Wrapper>
   );
 };
+
+HumidityAndWind.propTypes = {
+  humidity: PropTypes.number.isRequired,
+  windDirection: PropTypes.string.isRequired,
+  windSpeed: PropTypes.number.isRequired
+}
 
 export default HumidityAndWind;
